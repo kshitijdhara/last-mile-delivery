@@ -3,4 +3,4 @@ from flask import Flask
 
 @application.route('/', methods=['GET'])
 def hello():
-    return "Hello World"
+    return "Last Mile Delivery server running on localhost:8080"

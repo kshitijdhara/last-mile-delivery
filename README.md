@@ -25,6 +25,9 @@ git clone https://github.com/kshitijdhara/last-mile-delivery.git
 Running the **Server**
 
 <br>
+```
+pip install -r requirements.txt
+```
 
 ```
 python application.py
