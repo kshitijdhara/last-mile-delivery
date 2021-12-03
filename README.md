@@ -30,12 +30,16 @@ Adding the **Config** Files
 > 5. Rename the JSON Key File as firestore_config.json
 > 6. Move firestore_config.json in the directory /app/firestore_config.json 
 
-Running the **Server**
-
 <br>
+
+Installing the dependencies
+
 ```
 pip install -r requirements.txt
 ```
+<br>
+
+Running the **Server**
 
 ```
 python application.py
