@@ -1,2 +1,3 @@
 app/__pycache__/
 app/config.py
+app/firestore_config.json
