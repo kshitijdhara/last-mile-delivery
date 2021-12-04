@@ -7,8 +7,8 @@ import urllib
 
 def create_data():
   """Creates the data."""
-  data = {}
-  data['API_key'] = 'YOUR_API_KEY'
+  data = dict()
+  data['API_key'] = 'AIzaSyCmT870OdYMD3A_5jKDRRSRbj9-0J85Haw'
   data['addresses'] = ['3610+Hacks+Cross+Rd+Memphis+TN', # depot
                        '1921+Elvis+Presley+Blvd+Memphis+TN',
                        '149+Union+Avenue+Memphis+TN',
@@ -26,6 +26,7 @@ def create_data():
                        '814+Scott+St+Memphis+TN',
                        '1005+Tillman+St+Memphis+TN'
                       ]
+  print(f'data = {data}')
   return data
 
 def create_distance_matrix(data):
@@ -51,6 +52,7 @@ def create_distance_matrix(data):
     origin_addresses = addresses[q * max_rows: q * max_rows + r]
     response = send_request(origin_addresses, dest_addresses, API_key)
     distance_matrix += build_distance_matrix(response)
+    print(f'distance matrix = {distance_matrix}')
   return distance_matrix
 
 def send_request(origin_addresses, dest_addresses, API_key):
@@ -68,7 +70,7 @@ def send_request(origin_addresses, dest_addresses, API_key):
   dest_address_str = build_address_str(dest_addresses)
   request = request + '&origins=' + origin_address_str + '&destinations=' + \
                        dest_address_str + '&key=' + API_key
-  jsonResult = urllib.urlopen(request).read()
+  jsonResult = urllib.request.urlopen(request).read()
   response = json.loads(jsonResult)
   return response
 

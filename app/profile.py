@@ -19,7 +19,7 @@ def update_profile():
                 "driver_license": result.get("dl"),
                 "vehicle_number" : result.get("vno"),
                 "vehicle_rc": result.get("vrc"),
-                "status": "away",
+                "status": "away", # away or active
 
 
             }

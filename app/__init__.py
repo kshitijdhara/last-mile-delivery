@@ -21,5 +21,7 @@ vehicle_collection = db.collection("vehicle") # firestore vehicle collection
 
 from app import (
     server,
-    config
+    config,
+    auth,
+    profile
     )
