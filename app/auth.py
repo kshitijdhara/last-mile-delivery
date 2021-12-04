@@ -1,4 +1,3 @@
-from werkzeug.wrappers import response
 from app import application, auth
 
 
@@ -49,6 +48,30 @@ def change_password():
             response = {
                 "status": "Failed",
                 "type": "Password Reset Failed",
+                "msg": e
+                }
+            return response
+
+@application.route('/register', methods=['POST'])
+def register():
+    if request.method == 'POST':
+        try: 
+            data = request.form
+            email = data.get('email')
+            password = data.get('pwd')
+            user = auth.create_user_with_email_and_password(email, password)
+            user_details = auth.get_account_info(user['idToken'])
+            uid = auth.refresh(user['refreshToken'])  
+            response = {
+                "status": "Success",
+                "type": "Register Success",
+                "msg": uid
+                }
+            return response
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Register Failed",
                 "msg": e
                 }
             return response
