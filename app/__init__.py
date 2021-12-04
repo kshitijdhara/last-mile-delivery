@@ -19,9 +19,14 @@ default_app = initialize_app(cred)
 db = firestore.client()
 vehicle_collection = db.collection("vehicle") # firestore vehicle collection
 
+order_collection = db.collection("orders") # order database
+
+depot= "PICT Pune"
+
 from app import (
     server,
     config,
     auth,
-    profile
+    profile,
+    database
     )

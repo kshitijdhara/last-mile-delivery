@@ -3,14 +3,14 @@ from __future__ import print_function
 import requests
 import json
 import urllib
-from app import config
+from app import config, database, depot
 
 
 def create_data():
   """Creates the data."""
   data = dict()
   data['API_key'] = config.G_API_KEY
-  data['addresses'] = ['3610+Hacks+Cross+Rd+Memphis+TN', # depot
+  data['addresses'] = [depot, # depot
                        '1921+Elvis+Presley+Blvd+Memphis+TN',
                        '149+Union+Avenue+Memphis+TN',
                        '1034+Audubon+Drive+Memphis+TN',
