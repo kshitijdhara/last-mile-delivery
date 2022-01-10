@@ -26,7 +26,7 @@ depot= "PICT Pune"
 from app import (
     server,
     config,
-    auth,
+    authentication,
     profile,
     database
     )

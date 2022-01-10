@@ -1,3 +1,4 @@
+from logging import exception
 from app import application, auth
 
 
@@ -22,6 +23,7 @@ def login():
                 "msg": uid
                 }
             return response
+            
         except Exception as e:
             response = {
                 "status": "Failed",
@@ -59,6 +61,7 @@ def register():
             data = request.form
             email = data.get('email')
             password = data.get('pwd')
+            print(email)
             user = auth.create_user_with_email_and_password(email, password)
             user_details = auth.get_account_info(user['idToken'])
             uid = auth.refresh(user['refreshToken'])  
