@@ -1,3 +1,4 @@
+from flask.json import jsonify
 from app import application, order_collection
 import requests
 from flask import request
@@ -27,11 +28,16 @@ def get_orders():
             }
             return response
 
-
-def get_address(orders):
+@application.route("/lol")
+def get_address():
     delivery_locations = list()
-    for i in orders:
-        delivery_locations.append(i['customer_address'])
+    delivery_locations.append("camp")
+    orders = get_orders()['msg']
+    print(orders)
+    for key,value in orders:
+        print(key)
+        print(value)
+        delivery_locations.append(value['customer_address'])
 
     print(delivery_locations)
-
+    return jsonify(delivery_locations)
