@@ -34,10 +34,13 @@ def get_address():
     delivery_locations.append("camp")
     orders = get_orders()['msg']
     print(orders)
-    for key,value in orders:
+    for key,value in orders.items():
         print(key)
         print(value)
+        delivery_locations.append(value['shop_address'])
         delivery_locations.append(value['customer_address'])
 
     print(delivery_locations)
+    print(len(delivery_locations))
     return jsonify(delivery_locations)
+    # return orders
