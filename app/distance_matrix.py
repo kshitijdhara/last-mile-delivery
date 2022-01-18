@@ -91,6 +91,26 @@
 # distance_matrix = create_distance_matrix(data)
 # print(distance_matrix)
 
+addresses = data['addresses']
+
+pickup_deliveries = list()
+addresses.remove("depot")
+print(addresses)
+pickup_deliveries = list()
+i = 1
+while len(addresses):
+    temp_list = list()
+    for val in addresses:
+        temp_list.append(i)
+        i = i + 1
+        if len(temp_list) == 2:
+            break
+    pickup_deliveries.append(temp_list)
+    addresses.pop(0)
+    addresses.pop(0)
+
+print(pickup_deliveries)
+
 # dummy output for distance matrix 
 distance_matrix = [
         [

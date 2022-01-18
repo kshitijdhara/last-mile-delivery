@@ -3,7 +3,7 @@
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 
-from distance_matrix import distance_matrix
+from distance_matrix import distance_matrix, pickup_deliveries
 
 def create_data_model():
     """Stores the data for the problem."""
@@ -82,7 +82,7 @@ def create_data_model():
 
     
     data['distance_matrix'] = distance_matrix
-    data['pickups_deliveries'] = [
+    """data['pickups_deliveries'] = [
         [1, 6],
         [2, 10],
         [4, 3],
@@ -91,7 +91,9 @@ def create_data_model():
         [15, 11],
         [13, 12],
         [16, 14],
-    ]
+    ]"""
+
+    data['pickup_deliveries'] = pickup_deliveries
     data['num_vehicles'] = 4
     data['depot'] = 0
     return data
@@ -184,5 +186,5 @@ def main():
         print_solution(data, manager, routing, solution)
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
