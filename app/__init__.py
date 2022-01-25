@@ -28,5 +28,6 @@ from app import (
     config,
     authentication,
     profile,
-    database
+    database,
+    distance_matrix
     )
