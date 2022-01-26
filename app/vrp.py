@@ -3,16 +3,29 @@
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 
-from app import application, distance_matrix, database
+
+from app import application, distance_matrix
+
 
 def create_data_model():
     """Stores the data for the problem."""
     data = {}
+    # temp_data = {"msg":{
+    #     "pickup_deliveries":[[1, 2], [3, 4]],
+    #     "distance_matrix":[
+    #         [0, 11192, 10420, 9585, 10420],
+    #         [11974, 0, 4637, 3920, 4637],
+    #         [11469, 4510, 0, 1083, 0],
+    #         [10601, 3642, 745, 0, 745],
+    #         [11469, 4510, 0, 1083, 0]],
+    #     "addresses": ['Reliance+Mart+Kharadi+', 'Lunkad+Valencia+Viman+Nagar', 'Phoneix+Marketcity+Viman+Nagar', 'Lunkad+Valencia+Viman+Nagar']
+    # }}
+
     temp_data = distance_matrix.dd()
     data['addresses'] =  temp_data['msg']['addresses']
     data['distance_matrix'] = temp_data['msg']['distance_matrix']
     data['pickups_deliveries'] = temp_data['msg']['pickup_deliveries']
-    data['num_vehicles'] = 2
+    data['num_vehicles'] = 4
     data['depot'] = 0
     return data
 
@@ -44,8 +57,10 @@ def print_solution(data, manager, routing, solution):
     print(plan_dict)
     return plan_dict
 
+
+
 @application.route('/vrp')
-def vrpmain():
+def vrp_main():
     """Entry point of the program."""
     # Instantiate the data problem.
     data = create_data_model()
@@ -74,7 +89,7 @@ def vrpmain():
     routing.AddDimension(
         transit_callback_index,
         0,  # no slack
-        3000,  # vehicle maximum travel distance
+        30000,  # vehicle maximum travel distance
         True,  # start cumul to zero
         dimension_name)
     distance_dimension = routing.GetDimensionOrDie(dimension_name)
@@ -95,18 +110,25 @@ def vrpmain():
     # Setting first solution heuristic.
     search_parameters = pywrapcp.DefaultRoutingSearchParameters()
     search_parameters.first_solution_strategy = (
-        routing_enums_pb2.FirstSolutionStrategy.PARALLEL_CHEAPEST_INSERTION)
+        routing_enums_pb2.FirstSolutionStrategy.AUTOMATIC)
 
     # Solve the problem.
     solution = routing.SolveWithParameters(search_parameters)
 
-    response = "utha le re baba"
     # Print solution on console.
     if solution:
-        response = print_solution(data, manager, routing, solution)
-    
+        msg = print_solution(data, manager, routing, solution)
+        response = {
+            "msg": msg,
+            "type": "VRP success",
+            "status": "Success"
+        }
+    else:
+        msg = 'No solution found'
+        response = {
+        "msg": msg,
+        "type": "VRP failed",
+        "status": "Failed"
+    }
+
     return response
-
-
-# if __name__ == '__main__':
-#     main()

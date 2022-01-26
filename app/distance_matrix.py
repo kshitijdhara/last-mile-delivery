@@ -92,10 +92,13 @@ def dd():
     addresses = data['addresses']
     API_key = data['API_key']
     distance_matrix = create_distance_matrix(data)
+    print("\n\n\n------------------- DISTANCE MATRIX--------------------------\n\n")
     print(distance_matrix)    
+    print("\n\n\n------------------- ADDRESSES --------------------------\n\n")
     addresses = data['addresses']   
     pickup_deliveries = list()
-    addresses.remove("depot")
+    final_addresses = data['addresses']
+    addresses.remove("MG+Road+Camp+Pune")
     print(addresses)
     pickup_deliveries = list()
     i = 1
@@ -109,8 +112,18 @@ def dd():
         pickup_deliveries.append(temp_list)
         addresses.pop(0)
         addresses.pop(0)    
+    print("\n\n\n------------------- PICKUP AND DELIVERIES --------------------------\n\n")
     print(pickup_deliveries)
-    return distance_matrix
+    response = {
+      "msg":{
+        "pickup_deliveries": pickup_deliveries,
+        "distance_matrix": distance_matrix,
+        "addresses": final_addresses
+        },
+      "status": "Success",
+      "type":"create distance matrix success"
+    }
+    return response
 
 # # dummy output for distance matrix 
 # distance_matrix = [

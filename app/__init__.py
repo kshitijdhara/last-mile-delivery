@@ -29,5 +29,6 @@ from app import (
     authentication,
     profile,
     database,
-    distance_matrix
+    distance_matrix,
+    vrp
     )
