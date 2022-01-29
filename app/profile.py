@@ -63,3 +63,31 @@ def get_profile(uid):
                 "msg": e
                 }
             return response
+
+@application.route('/updatestatus', methods=['POST'])
+def update_status():
+    if request.method == 'POST':
+        try:
+            result = request.form
+            data = {
+                "status": result.get("status")
+            }
+            print("Data => ")
+            print(data)
+            uid = result.get("uid")
+            print("UID =>  " + uid)
+            vehicle_collection.document(uid).update(data)
+            response = {
+                "status": "Success",
+                "type": "Update Profile Status Success",
+                "msg": data
+                }
+            return response
+
+        except Exception as e:
+            response = {
+                "status": "Failed",
+                "type": "Update Profile Status Failed",
+                "msg": e
+                }
+            return response

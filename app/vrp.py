@@ -4,7 +4,7 @@ from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 
 
-from app import application, distance_matrix
+from app import application, distance_matrix, database
 
 
 def create_data_model():
@@ -25,7 +25,7 @@ def create_data_model():
     data['addresses'] =  temp_data['msg']['addresses']
     data['distance_matrix'] = temp_data['msg']['distance_matrix']
     data['pickups_deliveries'] = temp_data['msg']['pickup_deliveries']
-    data['num_vehicles'] = 4
+    data['num_vehicles'] = database.get_vehicles()['msg']['number_of_vehicles']
     data['depot'] = 0
     return data
 
@@ -119,14 +119,20 @@ def vrp_main():
     if solution:
         msg = print_solution(data, manager, routing, solution)
         response = {
-            "msg": msg,
+            "msg": {
+                "solution":msg,
+                "addresses": data['addresses']
+            },
             "type": "VRP success",
             "status": "Success"
         }
     else:
         msg = 'No solution found'
         response = {
-        "msg": msg,
+        "msg": {
+                "solution":msg,
+                "addresses": data['addresses']
+            },
         "type": "VRP failed",
         "status": "Failed"
     }
