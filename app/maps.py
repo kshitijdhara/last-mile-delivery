@@ -1,11 +1,11 @@
-from app import application, vrp
+from app import application, vrp, database
 
 from flask import request
 
 
-@application.route('/map', methods='POST')
+@application.route('/map', methods=['GET'])
 def map():
-    if request.method == 'POST':
+    if request.method == 'GET':
         temp_dict = {
             0:  [0,1,3,2,4,0],
             1:  [0,5,8,7,6,0],
@@ -13,8 +13,9 @@ def map():
             3:  [0,5,8,7,6,0],
         }
 
-        temp_data = vrp.vrp_main()['msg']
-        plan_dict = temp_data['solution']
+        temp_data = vrp.vrp_main()
+        plan_dict = temp_data['msg']
+        print("-------------------- MAPS -------------------")
         print(plan_dict)
         print(type(plan_dict))
         # addresses = ["depot", # depot
@@ -34,7 +35,8 @@ def map():
         #                        '814+Scott+St+Memphis+TN',
         #                        '1005+Tillman+St+Memphis+TN'
         #                       ]
-        addresses = temp_data['addresses']
+        addresses = database.get_address()
+        print(addresses)
         final_dict = dict()
 
         for key,value in plan_dict.items():
@@ -45,3 +47,4 @@ def map():
             final_dict[key] = temp_list
 
         print(final_dict)
+        return final_dict

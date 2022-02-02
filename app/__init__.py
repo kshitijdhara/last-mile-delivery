@@ -30,5 +30,6 @@ from app import (
     profile,
     database,
     distance_matrix,
-    vrp
+    vrp,
+    maps
     )

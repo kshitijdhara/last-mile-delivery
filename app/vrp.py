@@ -18,11 +18,9 @@ def create_data_model():
     #         [11469, 4510, 0, 1083, 0],
     #         [10601, 3642, 745, 0, 745],
     #         [11469, 4510, 0, 1083, 0]],
-    #     "addresses": ['Reliance+Mart+Kharadi+', 'Lunkad+Valencia+Viman+Nagar', 'Phoneix+Marketcity+Viman+Nagar', 'Lunkad+Valencia+Viman+Nagar']
     # }}
 
     temp_data = distance_matrix.dd()
-    data['addresses'] =  temp_data['msg']['addresses']
     data['distance_matrix'] = temp_data['msg']['distance_matrix']
     data['pickups_deliveries'] = temp_data['msg']['pickup_deliveries']
     data['num_vehicles'] = database.get_vehicles()['msg']['number_of_vehicles']
@@ -119,22 +117,18 @@ def vrp_main():
     if solution:
         msg = print_solution(data, manager, routing, solution)
         response = {
-            "msg": {
-                "solution":msg,
-                "addresses": data['addresses']
-            },
+            "msg": msg,
             "type": "VRP success",
             "status": "Success"
         }
     else:
         msg = 'No solution found'
         response = {
-        "msg": {
-                "solution":msg,
-                "addresses": data['addresses']
-            },
+        "msg": msg,
         "type": "VRP failed",
         "status": "Failed"
     }
-
+    print('----------------- VRP RESPONSE --------------------')
+    print(response)
+    print(data)
     return response
