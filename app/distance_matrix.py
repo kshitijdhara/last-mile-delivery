@@ -1,6 +1,6 @@
 from __future__ import division
 from __future__ import print_function
-from crypt import methods
+# from bcrypt 
 import requests
 import json
 import urllib
