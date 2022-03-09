@@ -84,6 +84,11 @@ def build_distance_matrix(response):
     distance_matrix.append(row_list)
   return distance_matrix
 
+
+
+
+
+# api to calculate the distance matrix for a given list of addresses
 @application.route('/distance', methods=['GET'])
 def dd():
     # """Entry point of the program"""

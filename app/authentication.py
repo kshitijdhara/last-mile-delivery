@@ -5,7 +5,7 @@ from app import application, auth
 from flask import Flask, request
 
 
-
+# api to facilitate application login 
 @application.route("/login", methods=['GET','POST'])
 def login():
     if request.method == 'POST':
@@ -33,6 +33,8 @@ def login():
             return response
 
 
+
+# api to facilitate change password functionality for a user
 @application.route("/changepwd", methods=['POST'])
 def change_password():
     if request.method == 'POST':
@@ -54,6 +56,8 @@ def change_password():
                 }
             return response
 
+
+# api to facilitate registration of a new delivery vehicle on the application
 @application.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':

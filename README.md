@@ -46,6 +46,6 @@ python application.py
 ```
 <br>
 
-To check if application is running open http://localhost:8080
+To check if application is running open http://localhost:8088
 > response should be
 > "Last Mile delivery server is running" 

@@ -64,6 +64,8 @@ def get_profile(uid):
                 }
             return response
 
+
+# api to update the status of the delivery vehicle i,e  either away or active
 @application.route('/updatestatus', methods=['POST'])
 def update_status():
     if request.method == 'POST':

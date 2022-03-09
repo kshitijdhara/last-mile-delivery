@@ -6,7 +6,7 @@ from flask import request
 import re
 
 
-
+# api to fetch the current active orders 
 @application.route('/getorders', methods=['GET'])
 def get_orders():
     if request.method == 'GET':
@@ -34,6 +34,9 @@ def get_orders():
             }
             return response
 
+
+
+# api to fetch the current active delivery vehicles 
 @application.route('/getvehicles', methods=['GET'])
 def get_vehicles():
     if request.method == 'GET':
@@ -64,7 +67,10 @@ def get_vehicles():
             }
             return response
 
-@application.route("/lol")
+
+            
+# api to get a list of pickup and delivery addresses from the current active orders 
+@application.route("/getaddresses")
 def get_address():
     delivery_locations = list()
     delivery_locations.append("MG+Road+Camp+Pune")

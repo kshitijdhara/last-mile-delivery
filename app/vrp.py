@@ -56,7 +56,7 @@ def print_solution(data, manager, routing, solution):
     return plan_dict
 
 
-
+# api to calculate the route based on the available delivery vehicles and the current active orders 
 @application.route('/vrp')
 def vrp_main():
     """Entry point of the program."""
