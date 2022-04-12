@@ -1,6 +1,25 @@
 from app import application, vrp, database
 
 from flask import request
+from flask_mail import Mail, Message
+
+
+
+mail = Mail(application) # instantiate the mail class
+
+# configuration of mail
+application.config['MAIL_SERVER']='smtp.gmail.com'
+application.config['MAIL_PORT'] = 465
+application.config['MAIL_USERNAME'] = 'dharakshitij@gmail.com'
+application.config['MAIL_PASSWORD'] = 'qayiguqhodoxumcf'
+application.config['MAIL_USE_TLS'] = False
+application.config['MAIL_USE_SSL'] = True
+mail = Mail(application)
+
+
+
+
+
 
 
 @application.route('/map', methods=['GET'])
@@ -87,4 +106,19 @@ def map():
             url_dict[key]= final_url
         print(url_dict)
         # return route_address_dict
+        vehicles_details = database.get_vehicles()['msg']['vehicles']
+        email_list = list()
+        for key, value in vehicles_details.items():
+            email_list.append(value['email'])
+            print(email_list)
+        print("------------EMAIL LIST--------------")
+        print(email_list)
+        for i in range(0,len(email_list)):
+            msg = Message(
+    	    			'Hello',
+    	    			sender ='dharakshitij@gmail.com',
+    	    			recipients = [email_list[i]]
+    	    		)
+            msg.body = url_dict[i]
+            mail.send(msg)
         return url_dict

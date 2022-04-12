@@ -33,3 +33,17 @@ from app import (
     vrp,
     maps
     )
+
+# from flask_mail import Mail, Message
+
+# # mail = Mail(application) # instantiate the mail class
+
+# # configuration of mail
+# application.config['MAIL_SERVER']='smtp.gmail.com'
+# application.config['MAIL_PORT'] = 465
+# application.config['MAIL_USERNAME'] = 'dharakshitij@gmail.com'
+# application.config['MAIL_PASSWORD'] = 'qayiguqhodoxumcf'
+# application.config['MAIL_USE_TLS'] = False
+# application.config['MAIL_USE_SSL'] = True
+# mail = Mail(application)
+
