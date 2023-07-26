@@ -1,5 +1,5 @@
 firebase_admin==5.1.0
-Flask==2.0.2
+Flask==2.2.5
 ortools==9.1.9490
 # pyrebase==3.0.27
 Pyrebase4==4.5.0
