@@ -3,5 +3,5 @@ Flask==2.2.5
 ortools==9.1.9490
 # pyrebase==3.0.27
 Pyrebase4==4.5.0
-requests==2.31.0
+requests==2.32.2
 Werkzeug==2.2.3
