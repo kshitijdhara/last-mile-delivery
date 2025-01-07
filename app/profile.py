@@ -1,7 +1,8 @@
 from pkg_resources import register_namespace_handler
 from app import application, vehicle_collection
 
-from flask import Flask, request,jsonify
+from flask import Flask, request, jsonify
+import logging
 
 
 
@@ -35,10 +36,11 @@ def update_profile():
             return response
 
         except Exception as e:
+            logging.error("Exception occurred", exc_info=True)
             response = {
                 "status": "Failed",
                 "type": "Update Profile Failed",
-                "msg": e
+                "msg": "An internal error has occurred!"
                 }
             return response
 
@@ -57,10 +59,11 @@ def get_profile(uid):
             }
             return response
         except Exception as e:
+            logging.error("Exception occurred", exc_info=True)
             response = {
                 "status": "Failed",
                 "type": "Get Profile Failed",
-                "msg": e
+                "msg": "An internal error has occurred!"
                 }
             return response
 
@@ -87,9 +90,10 @@ def update_status():
             return response
 
         except Exception as e:
+            logging.error("Exception occurred", exc_info=True)
             response = {
                 "status": "Failed",
                 "type": "Update Profile Status Failed",
-                "msg": e
+                "msg": "An internal error has occurred!"
                 }
             return response
